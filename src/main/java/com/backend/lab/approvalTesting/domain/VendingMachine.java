@@ -1,26 +1,42 @@
 package com.backend.lab.approvalTesting.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class VendingMachine {
 
     private String display;
     private List<Integer> coins;
-    private List<Integer> returns;
     private Integer balance;
+    private String selectedProduct;
+
+    private String dispensedProduct;
+    private List<Integer> returns;
+
+    private List<Integer> bank;
+
+    private Map<String, Integer> stock;
+
+    private Map<String, Integer> prices;
     private Integer[] acceptedCoins;
 
-    public VendingMachine() {
-        this("", new ArrayList<>(), new ArrayList<>(), 0, new Integer[]{5, 10, 25});
+
+
+    public VendingMachine(String selectedProduct, HashMap<String, Integer> stock) {
+        this("", new ArrayList<>(), 0, selectedProduct, null, new ArrayList<>(), new ArrayList<>(), stock, (HashMap<String, Integer>) Map.of("Cola", 100, "Chips", 50, "Candy", 65), new Integer[]{1, 5, 10, 25});
     }
 
-    public VendingMachine(String display, List<Integer> coins, List<Integer> returns, Integer balance, Integer[] acceptedCoins) {
+    public VendingMachine(String display, List<Integer> coins, Integer balance,
+                          String selectedProduct, String dispensedProduct, List<Integer> returns, List<Integer> bank,
+                          HashMap<String, Integer> stock, HashMap<String, Integer> prices, Integer[] acceptedCoins) {
         this.display = display;
         this.coins = coins;
-        this.returns = returns;
         this.balance = balance;
+        this.selectedProduct = selectedProduct;
+        this.dispensedProduct = dispensedProduct;
+        this.returns = returns;
+        this.bank = bank;
+        this.stock = stock;
+        this.prices = prices;
         this.acceptedCoins = acceptedCoins;
 
         displayBalance();

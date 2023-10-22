@@ -2,6 +2,9 @@ package com.backend.lab.vendingmachine;
 
 import com.backend.lab.approvalTesting.domain.VendingMachine;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class VendingMachinePrinter {
 
     private final int columns;
@@ -12,10 +15,25 @@ public class VendingMachinePrinter {
         this.machine = machine;
     }
 
+    public String printEverything() {
+       return print();
+    }
+
     private String print(){
         StringBuilder text = new StringBuilder();
         text.append("VendingMachine\n");
         // TODO: finish this
+        text.append(formatLineWithWhitespace("Display", machine.display()));
+
+        HashMap<String, String> fields = new HashMap<String, String>(){{
+            put("Balance", String.valueOf(machine.balance()));
+            put("Coins", Arrays.toString(machine.coins()));
+            put("Returns", Arrays.toString(machine.returns().toArray()));
+
+        }};
+
+        fields.forEach((name, value) -> text.append(formatLineWithWhitespace(name, value)));
+
         return text.toString();
     }
 
@@ -23,13 +41,10 @@ public class VendingMachinePrinter {
      eg if you call it with name="Foo" value="Bar" it will return
      Foo                                       Bar
      */
-    private String formatLineWithWhitespace(String name, String value){
+    private String formatLineWithWhitespace(String name, String value) {
         int whitespaceSize = columns - name.length() - value.length();
-        StringBuilder whiteSpace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
-            whiteSpace.append(" ");
-        }
-        String line = String.format("%s%s%s\n", name, whiteSpace.toString(), value);
-        return line;
+        String whiteSpace = " ".repeat(whitespaceSize);
+        return String.format("%s%s%s%n", name, whiteSpace, value);
     }
+
 }

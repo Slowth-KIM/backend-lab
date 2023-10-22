@@ -1,0 +1,5 @@
+VendingMachine
+Display                                          INSERT COIN
+Returns                                                  [5]
+Coins                                                     []
+Balance                                                    0

@@ -57,4 +57,17 @@ public class VendingMachine {
     public String display() {
         return display;
     }
+
+    public List<Integer> returns() {
+        return returns;
+    }
+
+    public List<Integer> returnCoins(){
+        this.balance = 0;
+        this.returns = this.coins;
+        this.coins = new ArrayList<>();
+        this.displayBalance();
+
+        return this.returns;
+    }
 }
